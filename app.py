@@ -4,9 +4,6 @@ d = "Basic bot to keep the pins cleans... cuz nigga I'm bored"
 
 bot = commands.Bot(command_prefix='!')
 
-pinups_str = 'pinups'
-
-
 @bot.command()
 async def recycle(num: int):
     channel = bot.get_channel('227549008711778305')
@@ -34,6 +31,11 @@ async def purge(message):
         await bot.purge_from(channel=message.channel, limit=num, before=message)
     return
 
+async def blood(message):
+    if message.content.contains('bloodshot problemz'):
+        await bot.say('leave blood alone :lirikthump:')
+    return
+
 
 @bot.command()
 async def description():
@@ -42,5 +44,6 @@ async def description():
 
 
 bot.add_listener(purge, 'on_message')
+bot.add_listener(blood, 'on_message')
 
 bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')

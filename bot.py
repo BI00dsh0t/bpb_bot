@@ -9,6 +9,7 @@ bot = commands.Bot(command_prefix='!')
 
 red = redis.from_url(os.environ.get("REDIS_URL"))
 
+
 @bot.command()
 async def recycle(num: int):
     channel = bot.get_channel('227549008711778305')
@@ -19,9 +20,9 @@ async def recycle(num: int):
 
     for message in messages:
         if len(message.content) > 0:
-            await bot.say(message.content)
+            await bot.send_message('389590243336126466', message.content)
         if len(message.attachments) > 0:
-            await bot.say(message.attachments[0].get('url'))
+            await bot.send_message('389590243336126466', message.attachments[0].get('url'))
 
         count = count + 1
 
@@ -46,7 +47,7 @@ async def blood(message):
 async def jm_dab_count(message: discord.Message):
     if message.author.id == '171567323017117696' and '<:TatDab:255555983437332480>' in message.content:
         red.incr('dab')
-        bot.send_message(message.channel, message.author.nick + ' has dabbed ' + red.get('dab') + ' times')
+        bot.send_message(message.channel, '{} has dabbed  {} times'.format(message.author.nick, red.get('dab')))
         red.bgsave()
     return
 

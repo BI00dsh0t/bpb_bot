@@ -1,9 +1,13 @@
 from discord.ext import commands
+import discord
+import os
+import redis
 
 d = "Basic bot to keep the pins cleans... cuz nigga I'm bored"
 
 bot = commands.Bot(command_prefix='!')
 
+red = redis.from_url(os.environ.get("REDIS_URL"))
 
 @bot.command()
 async def recycle(num: int):
@@ -39,6 +43,14 @@ async def blood(message):
     return
 
 
+async def jm_dab_count(message: discord.Message):
+    if message.author.id == '171567323017117696' and '<:TatDab:255555983437332480>' in message.content:
+        red.incr('dab')
+        bot.send_message(message.channel, message.author.nick + ' has dabbed ' + red.get('dab') + ' times')
+        red.bgsave()
+    return
+
+
 @bot.command()
 async def description():
     await bot.say(d)
@@ -47,5 +59,6 @@ async def description():
 
 bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
+bot.add_listener(jm_dab_count, 'on_message')
 
 bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')

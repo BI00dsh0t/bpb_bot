@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 import os
 import redis
+from fuzzywuzzy import fuzz
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
 
@@ -38,7 +39,7 @@ async def purge(message):
 
 
 async def blood(message):
-    if 'bloodshot problem' in message.content:
+    if fuzz.ratio('bloodshot problems', message.content) > 50:
         await bot.send_message(message.channel, 'leave blood alone <:lirikThump:311191142286884864>')
     return
 

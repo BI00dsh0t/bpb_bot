@@ -3,7 +3,7 @@ import discord
 import os
 import redis
 
-d = "Basic bot to keep the pins cleans... cuz nigga I'm bored"
+d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
 
 bot = commands.Bot(command_prefix='!')
 
@@ -61,4 +61,4 @@ bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
 bot.add_listener(jm_dab_count, 'on_message')
 
-bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')
+bot.run(os.environ.get('bot_code'))

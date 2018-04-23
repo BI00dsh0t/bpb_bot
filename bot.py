@@ -39,7 +39,7 @@ async def purge(message):
 
 
 async def blood(message):
-    if 'bloodshot problem' in message.content:
+    if 'bloodshot problem' or 'bloodshot issue' in message.content:
         await bot.send_message(message.channel, 'leave blood alone <:lirikThump:311191142286884864>')
     return
 

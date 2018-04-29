@@ -1,13 +1,12 @@
 import os
 
-import redis
 from discord.ext import commands
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
 
 bot = commands.Bot(command_prefix='!')
 
-red = redis.from_url(os.environ.get("REDIS_URL"))
+#red = redis.from_url(os.environ.get("REDIS_URL"))
 
 
 @bot.command()
@@ -37,11 +36,8 @@ async def purge(message):
     if message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
         await bot.purge_from(channel=message.channel, limit=num, before=message)
-    return
 
-
-async def purge_me(message):
-    if message.content.startswith('!purgeme'.lower()):
+    elif message.content.startswith('!purgeme'.lower()):
         num = int(message.content.split(' ')[1])
 
         counter = 0
@@ -62,7 +58,7 @@ async def description():
     return
 
 
-bot.add_listener(purge_me, 'on_message')
 bot.add_listener(purge, 'on_message')
+
 
 bot.run(os.environ.get('bot_code'))

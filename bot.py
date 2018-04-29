@@ -1,5 +1,3 @@
-import os
-
 from discord.ext import commands
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
@@ -52,6 +50,11 @@ async def purge(message):
     return
 
 
+async def blood(message):
+    if 'bloodshot problem' in message.content or 'bloodshot issue' in message.content:
+        await bot.send_message(message.channel, 'leave blood alone <:lirikThump:311191142286884864>')
+
+
 @bot.command()
 async def description():
     await bot.say(d)
@@ -59,6 +62,8 @@ async def description():
 
 
 bot.add_listener(purge, 'on_message')
+bot.add_listener(blood, 'on_message')
 
 
-bot.run(os.environ.get('bot_code'))
+#bot.run(os.environ.get('bot_code'))
+bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')

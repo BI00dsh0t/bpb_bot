@@ -26,15 +26,33 @@ async def recycle(num: int):
 
         count = count + 1
 
+        await bot.unpin_message(message)
+
         if count >= num:
             break
     return
 
 
 async def purge(message):
-    if message.content.startswith('!purge'):
+    if message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
         await bot.purge_from(channel=message.channel, limit=num, before=message)
+    return
+
+
+async def purge_me(message):
+    if message.content.startswith('!purgeme'.lower()):
+        num = int(message.content.split(' ')[1])
+
+        counter = 0
+
+        while counter < num:
+            messages = bot.logs_from(message.channel, 100, message)
+
+            for mes in messages:
+                if mes.author == message.author:
+                    bot.delete_message(mes)
+                    counter += 1
     return
 
 
@@ -58,6 +76,7 @@ async def description():
     return
 
 
+bot.add_listener(purge_me, 'on_message')
 bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
 bot.add_listener(jm_dab_count, 'on_message')

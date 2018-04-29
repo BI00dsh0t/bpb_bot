@@ -14,14 +14,15 @@ async def recycle(num: int):
     channel = bot.get_channel('227549008711778305')
     pins = await bot.pins_from(channel)
     messages = list(pins)
+    pinups_channel = bot.get_channel('389590243336126466')
 
     count = 0
 
     for message in messages:
         if len(message.content) > 0:
-            await bot.send_message('389590243336126466', message.content)
+            await bot.send_message(pinups_channel, message.content)
         if len(message.attachments) > 0:
-            await bot.send_message('389590243336126466', message.attachments[0].get('url'))
+            await bot.send_message(pinups_channel, message.attachments[0].get('url'))
 
         count = count + 1
 

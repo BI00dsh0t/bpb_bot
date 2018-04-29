@@ -1,3 +1,5 @@
+import os
+
 from discord.ext import commands
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
@@ -65,5 +67,4 @@ bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
 
 
-#bot.run(os.environ.get('bot_code'))
-bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')
+bot.run(os.environ.get('bot_code'))

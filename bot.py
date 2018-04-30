@@ -1,3 +1,5 @@
+import os
+
 from discord.ext import commands
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
@@ -38,11 +40,13 @@ async def purge(message):
 
         counter = 0
 
-        while counter < num:
+        while True:
             async for mes in bot.logs_from(channel=message.channel, limit=100, before=message):
                 if mes.author == message.author:
                     await bot.delete_message(mes)
                     counter += 1
+                    if counter >= num:
+                        break
 
     elif message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
@@ -64,4 +68,4 @@ async def description():
 bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
 
-bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')
+bot.run(os.environ.get('bot_code'))

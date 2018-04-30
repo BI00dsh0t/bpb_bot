@@ -52,13 +52,8 @@ async def purge(message):
     elif message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
         await bot.purge_from(channel=message.channel, limit=num, before=message)
-        
+
     return
-
-
-@bot.command()
-async def help():
-    await bot.say('Please use !help <command> for further explanation of each command')
 
 
 async def blood(message):

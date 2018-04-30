@@ -1,5 +1,3 @@
-import os
-
 from discord.ext import commands
 
 d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
@@ -35,24 +33,20 @@ async def recycle(num: int):
 
 
 async def purge(message):
-
     if message.content.startswith('!purgeme'.lower()):
         num = int(message.content.split(' ')[1])
 
         counter = 0
 
         while counter < num:
-            messages = bot.logs_from(message.channel, 100, message)
-
-            for mes in messages:
+            async for mes in bot.logs_from(channel=message.channel, limit=100, before=message):
                 if mes.author == message.author:
-                    bot.delete_message(mes)
+                    await bot.delete_message(mes)
                     counter += 1
 
     elif message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
         await bot.purge_from(channel=message.channel, limit=num, before=message)
-
     return
 
 
@@ -70,4 +64,4 @@ async def description():
 bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
 
-bot.run(os.environ.get('bot_code'))
+bot.run('Mzg5NjE1Nzg0OTgyMzQ3Nzgw.DRBzpQ.uLqhIxgA9q0a1C55xzn2GUDZcFQ')

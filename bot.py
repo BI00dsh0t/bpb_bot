@@ -6,7 +6,8 @@ d = "Basic bot to keep the pins cleans... cuz dawg I'm bored"
 
 bot = commands.Bot(command_prefix='!')
 
-#red = redis.from_url(os.environ.get("REDIS_URL"))
+
+# red = redis.from_url(os.environ.get("REDIS_URL"))
 
 
 @bot.command()
@@ -34,11 +35,8 @@ async def recycle(num: int):
 
 
 async def purge(message):
-    if message.content.startswith('!purge'.lower()):
-        num = int(message.content.split(' ')[1])
-        await bot.purge_from(channel=message.channel, limit=num, before=message)
 
-    elif message.content.startswith('!purgeme'.lower()):
+    if message.content.startswith('!purgeme'.lower()):
         num = int(message.content.split(' ')[1])
 
         counter = 0
@@ -50,7 +48,17 @@ async def purge(message):
                 if mes.author == message.author:
                     bot.delete_message(mes)
                     counter += 1
+
+    elif message.content.startswith('!purge'.lower()):
+        num = int(message.content.split(' ')[1])
+        await bot.purge_from(channel=message.channel, limit=num, before=message)
+        
     return
+
+
+@bot.command()
+async def help():
+    await bot.say('Please use !help <command> for further explanation of each command')
 
 
 async def blood(message):
@@ -66,6 +74,5 @@ async def description():
 
 bot.add_listener(purge, 'on_message')
 bot.add_listener(blood, 'on_message')
-
 
 bot.run(os.environ.get('bot_code'))

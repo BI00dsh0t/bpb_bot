@@ -41,16 +41,16 @@ async def purge(message):
         counter = 0
 
         while True:
-            async for mes in bot.logs_from(channel=message.channel, limit=100, before=message):
+            async for mes in bot.logs_from(channel=message.channel, limit=100):
                 if mes.author == message.author:
                     await bot.delete_message(mes)
                     counter += 1
-                    if counter >= num:
+                    if counter > num:
                         break
 
     elif message.content.startswith('!purge'.lower()):
         num = int(message.content.split(' ')[1])
-        await bot.purge_from(channel=message.channel, limit=num, before=message)
+        await bot.purge_from(channel=message.channel, limit=num)
     return
 
 
